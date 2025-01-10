@@ -6,14 +6,14 @@ function Home() {
   const [data, setData] = useState(null);
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  const PargeCount = 4;
+  const PargeCount = 8;
 
   useEffect(() => {
     function test() {
       axios
         .get("https://dummyjson.com/products", {
           params: {
-            limit: PargeCount,
+            limit: PargeCount * count,
           },
         })
 
@@ -23,21 +23,29 @@ function Home() {
         });
     }
     test();
-  }, []);
+  }, [count]);
 
   console.log(data);
   return (
-    <div className="home">
-      {data?.products?.map((val) => (
-        <div className="product" key={val.id}>
-          <img
-            onClick={() => navigate(`/product/${val.id}`)}
-            src={val.thumbnail}
-            alt=""
-          />
-          <h4> {val.title} </h4>
-        </div>
-      ))}
+    <div className="home_container">
+      <div className="home">
+        {data?.products?.map((val) => (
+          <div className="product" key={val.id}>
+            <img
+              onClick={() => navigate(`/product/${val.id}`)}
+              src={val.thumbnail}
+              alt=""
+            />
+            <h4> {val.title} </h4>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={() => setCount((prev) => prev + 1)}
+        className="product_button"
+      >
+        See more {count * PargeCount}
+      </button>
     </div>
   );
 }
