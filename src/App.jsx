@@ -5,7 +5,6 @@ import Routers from "./router/Routers";
 function App() {
   return (
     <div>
-      <h1>lkndvkdnfvkjdfnvkdjfnkjknkjn</h1>
       <Routers />
     </div>
   );
